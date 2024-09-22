@@ -1,0 +1,1 @@
+alter table users add data_nascimento char(8) not null;

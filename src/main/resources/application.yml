@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    drive-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/tcc_faculdade
+    username: root
+    password: G@brielferrari91
