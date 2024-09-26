@@ -1,6 +1,17 @@
+#spring:
+#  datasource:
+#    drive-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost/tcc_faculdade
+#    username: root
+#    password: G@brielferrari91
+
 spring:
   datasource:
-    drive-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost/tcc_faculdade
-    username: root
-    password: G@brielferrari91
+    url: jdbc:postgresql://localhost:5432/dog
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
