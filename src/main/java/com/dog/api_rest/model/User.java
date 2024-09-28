@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.dog.api_rest.dto.UserDTO;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -53,29 +53,22 @@ public class User implements UserDetails {
     @NotBlank(message = "O usuario deve informar nome.")
     private String nome;
     
+    @CPF(message = "O cpf informado está invalido,")
     @NotBlank(message = "O usuario deve informar cpf.")
     private String cpf;
     
-    @NotBlank(message = "O usuario deve informar data de nascimento.")
+    @NotNull(message = "O usuario deve informar data de nascimento.")
     private LocalDate dataNascimento;
     
     @Valid
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @NotNull(message = "O usuario deve informar endereco.")
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
     
+    @Valid
     @OneToMany(mappedBy="user")
     private Set<Dog> dogs;
-
-    public User(UserDTO dados){
-        this.nome = dados.nome();
-        this.email = dados.email();
-        this.senha = dados.senha();
-        this.cpf = dados.cpf();
-        //this.data_nascimento = dados.data_nascimento();
-        this.endereco = new Endereco(dados.endereco());
-    }
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

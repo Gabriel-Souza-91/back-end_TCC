@@ -2,8 +2,6 @@ package com.dog.api_rest.model;
 
 import java.io.Serializable;
 
-import com.dog.api_rest.dto.EnderecoDTO;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,8 +12,10 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,15 +39,4 @@ public class Endereco implements Serializable {
     private String uf;
     private String numero;
     private String complemento;
-
-    public Endereco(EnderecoDTO dados){
-        this.cep = dados.cep();
-        this.logradouro = dados.logradouro();
-        this.bairro = dados.bairro();
-        this.cidade = dados.cidade();
-        this.uf = dados.uf();
-        this.numero = dados.numero();
-        this.complemento = dados.complemento();
-    }
-
 }

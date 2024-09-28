@@ -1,10 +1,7 @@
-#spring:
-#  datasource:
-#    drive-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost/tcc_faculdade
-#    username: root
-#    password: G@brielferrari91
-
+security:
+  jwt:
+    secret-key: Z2FicmllbCB0cmFiYWxobyBkZSBjb25jbHVjYW8gZGUgY2x1c28=
+    expiration-time: -1
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/dog
