@@ -1,4 +1,4 @@
-package com.dog.api_rest.dto;
+package com.dog.api_rest.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;

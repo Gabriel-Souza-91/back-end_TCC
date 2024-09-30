@@ -1,4 +1,4 @@
-package com.dog.api_rest.dto;
+package com.dog.api_rest.model.dto;
 
 import com.dog.api_rest.model.enums.Porte;
 import com.dog.api_rest.model.enums.Raca;

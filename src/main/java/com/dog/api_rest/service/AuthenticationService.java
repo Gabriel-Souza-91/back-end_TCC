@@ -10,11 +10,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.dog.api_rest.config.bussines.BusinessException;
-import com.dog.api_rest.dto.EnderecoDTO;
-import com.dog.api_rest.dto.LoginUserDto;
-import com.dog.api_rest.dto.UserDTO;
 import com.dog.api_rest.model.Endereco;
 import com.dog.api_rest.model.User;
+import com.dog.api_rest.model.dto.EnderecoDTO;
+import com.dog.api_rest.model.dto.LoginUserDto;
+import com.dog.api_rest.model.dto.UserDTO;
 import com.dog.api_rest.repository.UserRepository;
 
 @Service

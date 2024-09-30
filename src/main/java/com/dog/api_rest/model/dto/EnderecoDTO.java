@@ -1,4 +1,4 @@
-package com.dog.api_rest.dto;
+package com.dog.api_rest.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

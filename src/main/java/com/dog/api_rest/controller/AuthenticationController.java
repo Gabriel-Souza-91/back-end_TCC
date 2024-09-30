@@ -2,19 +2,16 @@ package com.dog.api_rest.controller;
 
 import static org.springframework.http.ResponseEntity.ok;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dog.api_rest.config.bussines.BusinessException;
-import com.dog.api_rest.dto.LoginResponse;
-import com.dog.api_rest.dto.LoginUserDto;
-import com.dog.api_rest.dto.UserDTO;
 import com.dog.api_rest.model.User;
+import com.dog.api_rest.model.dto.LoginResponseDTO;
+import com.dog.api_rest.model.dto.LoginUserDto;
+import com.dog.api_rest.model.dto.UserDTO;
 import com.dog.api_rest.service.AuthenticationService;
 import com.dog.api_rest.service.JwtService;
 
@@ -37,10 +34,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
+    public ResponseEntity<LoginResponseDTO> authenticate(@RequestBody LoginUserDto loginUserDto) {
         User authenticatedUser = authenticationService.login(loginUserDto);
         String jwtToken = jwtService.generateToken(authenticatedUser);
-        LoginResponse loginResponse = new LoginResponse();
+        LoginResponseDTO loginResponse = new LoginResponseDTO();
         loginResponse.setToken(jwtToken);
         loginResponse.setExpiresIn(jwtService.getExpirationTime());
         return ResponseEntity.ok(loginResponse);
