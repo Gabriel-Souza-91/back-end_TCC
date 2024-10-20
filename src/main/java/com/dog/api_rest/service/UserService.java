@@ -20,4 +20,8 @@ public class UserService implements UserDetailsService {
 		User user = userRepository.findByEmail(email);
 		return (UserDetails) user;
 	}
+	
+	public User findByEmail(String email){
+		return userRepository.findByEmail(email);
+	}
 }
