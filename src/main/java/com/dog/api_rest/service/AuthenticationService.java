@@ -38,11 +38,14 @@ public class AuthenticationService {
 	public User criarUsuario(UserDTO input) {
 		User user = new User();
 		UserDetails loadUserByUsername = userService.loadUserByUsername(input.email());
+		User userCPF = userService.findByCpf(input.cpf());
 		if(nonNull(loadUserByUsername)) {
-			throw new BusinessException("Usuario ja está cadastrado");
+			throw new BusinessException("Usuario ja está cadastrado com este e-mail");
+		}
+		if(nonNull(userCPF)) {
+			throw new BusinessException("Usuario ja está cadastrado com este CPF.");
 		}
 		setFieldsUser(input, user);
-		setFieldsEndereco(input.endereco(), user);
 		return userRepository.save(user);
 	}
 
@@ -64,7 +67,6 @@ public class AuthenticationService {
 		endereco.setUf(input.uf());
 		endereco.setNumero(input.numero());
 		endereco.setComplemento(input.complemento());
-		endereco.setUser(user);
 		user.setEndereco(endereco);
 	}
 
@@ -74,5 +76,11 @@ public class AuthenticationService {
 		user.setCpf(input.cpf());
 		user.setDataNascimento(input.dataNascimento());
 		user.setSenha(passwordEncoder.encode(input.senha()));
+	}
+
+	public void criarEndereco(UserDetails user, EnderecoDTO enderecoDTO) {
+		User findByEmail = userRepository.findByEmail(user.getUsername());
+		setFieldsEndereco(enderecoDTO, findByEmail);
+		userRepository.save(findByEmail);
 	}
 }

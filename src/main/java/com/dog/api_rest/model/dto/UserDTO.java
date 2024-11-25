@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,15 +21,12 @@ public record UserDTO(
         @NotBlank
         @Email
         String email,
-
+        
         @NotBlank
         String senha,
         
         @NotNull(message = "A data de nascimento não pode ser nula ou vazia")
         @DateTimeFormat(fallbackPatterns = "yyyy-MM-dd")
-        LocalDate dataNascimento,
-
-        @NotNull
-        @Valid
-        EnderecoDTO endereco){
+        LocalDate dataNascimento
+		){
 }

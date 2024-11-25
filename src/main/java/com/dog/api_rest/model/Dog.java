@@ -1,8 +1,11 @@
 package com.dog.api_rest.model;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import com.dog.api_rest.model.enums.Porte;
 import com.dog.api_rest.model.enums.Raca;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -52,8 +55,12 @@ public class Dog {
     @NotNull(message = "O nome do cachorro não pode ser nulo")
     private Integer idade;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
     
+    @Override
+	public String toString() {
+		return ReflectionToStringBuilder.toStringExclude(this, "user");
+	}
 }

@@ -1,7 +1,7 @@
 security:
   jwt:
     secret-key: Z2FicmllbCB0cmFiYWxobyBkZSBjb25jbHVjYW8gZGUgY2x1c28=
-    expiration-time: -1
+    expiration-time: 999999999
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/dog

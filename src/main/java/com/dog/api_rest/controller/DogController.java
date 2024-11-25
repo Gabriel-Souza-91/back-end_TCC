@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,4 +52,10 @@ public class DogController {
 		return ResponseEntity.ok(service.getDog(id, user));
 	}
 	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Dog> deleteDog(@PathVariable Long id) {
+		UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		service.deleteDog(id, user);
+		return ResponseEntity.noContent().build();
+	}
 }

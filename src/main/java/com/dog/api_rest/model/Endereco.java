@@ -2,11 +2,12 @@ package com.dog.api_rest.model;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -22,21 +23,34 @@ import lombok.Setter;
 @Table(name = "enderecos")
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-	
-	@OneToOne(mappedBy = "endereco")
-	private User user;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@NotBlank(message = "O usuario deve informar cep.")
 	private String cep;
-	
-    private String logradouro;
-    private String bairro;
-    private String cidade;
-    private String uf;
-    private String numero;
-    private String complemento;
+
+	@NotBlank(message = "O usuario deve informar logradouro.")
+	private String logradouro;
+
+	@NotBlank(message = "O usuario deve informar bairro.")
+	private String bairro;
+
+	@NotBlank(message = "O usuario deve informar cidade.")
+	private String cidade;
+
+	@NotBlank(message = "O usuario deve informar uf.")
+	private String uf;
+
+	@NotBlank(message = "O usuario deve informar numero.")
+	private String numero;
+
+	@NotBlank(message = "O usuario deve informar complemento.")
+	private String complemento;
+
+	@Override
+	public String toString() {
+		return ReflectionToStringBuilder.toStringExclude(this, "user");
+	}
 }

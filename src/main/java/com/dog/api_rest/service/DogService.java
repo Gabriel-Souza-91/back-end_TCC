@@ -1,11 +1,15 @@
 package com.dog.api_rest.service;
 
+import static java.util.Objects.nonNull;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.dog.api_rest.config.bussines.BusinessException;
 import com.dog.api_rest.model.Dog;
 import com.dog.api_rest.model.User;
 import com.dog.api_rest.model.dto.DogDTO;
@@ -22,7 +26,17 @@ public class DogService {
 	
 	public void novoDog(DogDTO dogDTO, UserDetails user) {
 		User userDB = userService.findByEmail(user.getUsername());
+		List<Dog> allDogs = getAllDogs(userDB);
+		if(nonNull(allDogs) && allDogs.size() >= 4) {
+			throw new BusinessException("Você atingiu o limite de cachorros.");
+		}
 		repository.save(createDogEntity(dogDTO, userDB));
+	}
+	
+	@Transactional(readOnly = false)
+	public void deleteDog(Long id, UserDetails user) {
+		User userDB = userService.findByEmail(user.getUsername());
+		repository.deleteByUserAndId(userDB, id);
 	}
 	
 	public void atualizarDog(DogDTO dogDTO, Long id, UserDetails user) {

@@ -3,8 +3,8 @@ package com.dog.api_rest.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +15,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.Valid;
@@ -62,14 +61,9 @@ public class User implements UserDetails {
     
     @Valid
     @OneToOne(cascade = CascadeType.ALL)
-    @NotNull(message = "O usuario deve informar endereco.")
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
     
-    @Valid
-    @OneToMany(mappedBy="user")
-    private Set<Dog> dogs;
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return new ArrayList<>();
@@ -84,6 +78,11 @@ public class User implements UserDetails {
 	public String getUsername() {
 		return this.email;
 	}
-
+	
+	
+	@Override
+	public String toString() {
+		return ReflectionToStringBuilder.toStringExclude(this, "dogs", "endereco");
+	}
 
 }
